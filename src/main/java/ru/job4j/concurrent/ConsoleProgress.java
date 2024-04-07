@@ -9,12 +9,10 @@ public class ConsoleProgress implements Runnable {
                 for (int i = 0; i < 4; i++) {
                     Thread.sleep(500);
                     System.out.print("\r load: " + process[i]);
-            }
-
+                }
             } catch (InterruptedException e) {
-                e.fillInStackTrace();
+                Thread.currentThread().interrupt();
             }
-
         }
     }
 
@@ -25,7 +23,7 @@ public class ConsoleProgress implements Runnable {
             Thread.sleep(5000);
             progress.interrupt();
         } catch (InterruptedException e) {
-            e.fillInStackTrace();
+            Thread.currentThread().interrupt();
         }
 
     }
