@@ -4,21 +4,23 @@ public class ThreadState {
     public static void main(String[] args) {
 
         Thread first = new Thread(
-                () -> System.out.println(Thread.currentThread().getName())
+                () -> { }
         );
         Thread second = new Thread(
-                () -> System.out.println(Thread.currentThread().getName())
+                () -> { }
         );
         first.start();
         second.start();
-        try {
-            Thread.sleep(100);
-            Thread.sleep(100);
-        } catch (InterruptedException e) {
-            e.fillInStackTrace();
+        while (first.getState() != Thread.State.TERMINATED
+                && second.getState() != Thread.State.TERMINATED) {
+            System.out.println(first.getName()
+                    + " "
+                    + second.getName());
         }
-        System.out.println(first.getState() + " "
-                + second.getState()
-                + " работа завершена");
+        System.out.println(first.getName() + ": "
+                + first.getState() + "\n"
+                + second.getName() + ": "
+                + second.getState() + "\n"
+                + "Работа завершена");
     }
 }
