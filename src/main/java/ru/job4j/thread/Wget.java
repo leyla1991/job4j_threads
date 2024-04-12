@@ -11,16 +11,17 @@ public class Wget implements Runnable {
 
     private final String url;
     private final int speed;
+    private final String file;
 
-    public Wget(String url, int speed) {
+    public Wget(String url, int speed, String file) {
         this.url = url;
         this.speed = speed;
+        this.file = file;
     }
 
     @Override
     public void run() {
         var startAt = System.currentTimeMillis();
-        var file = new File("tmp.xml");
         try (var input = new URL(url).openStream();
         var output = new FileOutputStream(file)) {
             System.out.println("Open connection: "
@@ -50,12 +51,14 @@ public class Wget implements Runnable {
     }
 
     public static boolean isValidURL(String url) {
+        boolean rsl = false;
         try {
             new URL(url).toURI();
-            return true;
+            rsl = true;
         } catch (MalformedURLException | URISyntaxException e) {
-            return false;
+            e.printStackTrace();
         }
+        return rsl;
     }
 
     public static void validation(String[] args) {
@@ -74,7 +77,8 @@ public class Wget implements Runnable {
         validation(args);
         String url = args[0];
         int speed = Integer.parseInt(args[1]);
-        Thread thread = new Thread(new Wget(url, speed));
+        String file = args[2];
+        Thread thread = new Thread(new Wget(url, speed, file));
         thread.start();
         try {
             thread.join();
