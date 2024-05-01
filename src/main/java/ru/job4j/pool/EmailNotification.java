@@ -1,6 +1,5 @@
 package ru.job4j.pool;
 
-import java.util.concurrent.Executor;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 public class EmailNotification {
