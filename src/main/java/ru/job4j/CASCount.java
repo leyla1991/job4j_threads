@@ -3,9 +3,6 @@ package ru.job4j;
 import net.jcip.annotations.ThreadSafe;
 
 import java.util.concurrent.atomic.AtomicInteger;
-import java.util.concurrent.atomic.AtomicReference;
-import java.util.stream.IntStream;
-
 @ThreadSafe
 public class CASCount {
     private final AtomicInteger count = new AtomicInteger();
