@@ -16,7 +16,7 @@ public class EmailNotification {
                 String subject = String.format("Notification %s to email %s.", user.username(), user.email());
                 String body = String.format(" Add a new event to %s", user.username());
                 send(subject, body, user.email());
-        };
+        }
     });
     }
 
