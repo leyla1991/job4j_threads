@@ -10,12 +10,12 @@ public class FindIdTest {
     public void whenVariousType() {
        String[] s = {"T", "S", "P", "R", "W", "A", "G", "Q", "I", "Z", "M"};
        Integer[] array = {1, 3, 4 , 6, 7, 8, 9, 10, 23, 323, 34};
-       FindId<String> stringFindId = new FindId<>(s,  "W", 0, s.length);
-       FindId<Integer> arrayF = new FindId<>(array, 3, 0, array.length);
-       stringFindId.computeFind(s);
-       arrayF.computeFind(array);
-       assertThat(arrayF.compute()).isEqualTo(1);
-       assertThat(stringFindId.compute()).isEqualTo(4);
+       String valueS = "W";
+       Integer valueA = 3;
+       FindId<String> stringFindId = new FindId<>(s,  valueS, 0, s.length);
+       FindId<Integer> arrayF = new FindId<>(array, valueA, 0, array.length);
+       assertThat( stringFindId.computeFind(s, valueS)).isEqualTo(4);
+       assertThat(arrayF.computeFind(array, valueA)).isEqualTo(1);
     }
 
     @Test
@@ -23,8 +23,7 @@ public class FindIdTest {
         Integer[] i = {1, 2, 3, 4};
         Integer value = 3;
         FindId<Integer> integerFindId = new FindId<>(i,  value, 0, i.length);
-        integerFindId.computeFind(i);
-        assertThat(integerFindId.compute()).isEqualTo(2);
+        assertThat(integerFindId.computeFind(i, value)).isEqualTo(2);
     }
 
     @Test
@@ -33,16 +32,15 @@ public class FindIdTest {
         array[565] = 566;
         Integer value = 566;
         FindId<Integer> integerFindId = new FindId<>(array, value, 0, array.length);
-        integerFindId.computeFind(array);
-        assertThat(integerFindId.compute()).isEqualTo(565);
+        assertThat(integerFindId.computeFind(array, value)).isEqualTo(565);
     }
 
     @Test
     public void whenIndexNotFound() {
         String[] array = new String[102232];
         array[1] = "S";
-        FindId<String> indexFound = new FindId<>(array, "W", 0, array.length);
-        indexFound.computeFind(array);
-        assertThat(indexFound.compute()).isEqualTo(-1);
+        String value = "W";
+        FindId<String> indexFound = new FindId<>(array, value, 0, array.length);
+        assertThat(indexFound.computeFind(array, value)).isEqualTo(-1);
     }
 }
