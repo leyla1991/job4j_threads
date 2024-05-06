@@ -43,4 +43,13 @@ public class FindIdTest {
         FindId<String> indexFound = new FindId<>(array, value, 0, array.length);
         assertThat(indexFound.computeFind(array, value)).isEqualTo(-1);
     }
+
+    @Test
+    public void whenFindLastIndex() {
+        String[] array = new String[100];
+        array[array.length - 1] = "W";
+        String value = "W";
+        FindId<String> id = new FindId<>(array, value, 0, array.length);
+        assertThat(id.computeFind(array, value)).isEqualTo(array.length - 1);
+    }
 }

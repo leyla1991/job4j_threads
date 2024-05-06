@@ -31,12 +31,12 @@ public class FindId<T> extends RecursiveTask<Integer> {
         second.fork();
         int indF = first.join();
         int indS = second.join();
-        return  Math.max(indS, indF);
+        return Math.max(indS, indF);
     }
 
     public static <T> int computeFind(T[] array, T value) {
         ForkJoinPool forkJoinPool = new ForkJoinPool();
-       return forkJoinPool.invoke(new FindId<>(array, value, 0, array.length - 1));
+       return forkJoinPool.invoke(new FindId<>(array, value, 0, array.length));
     }
 
     public int search() {
@@ -53,7 +53,7 @@ public class FindId<T> extends RecursiveTask<Integer> {
     public static void main(String[] args) {
         Integer[] rs = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 12, 123, 133, 1343, 12312312};
         FindId<Integer> findId = new FindId<>(rs, 4, 0, rs.length);
-        findId.computeFind(rs, 4);
+        computeFind(rs, 4);
         System.out.println(findId.compute());
     }
 }
